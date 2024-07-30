@@ -1,15 +1,18 @@
-# typescript
+# 🎧 Lucid
 
-To install dependencies:
+Esta es una simple linea de comandos para descargar musica desde la plataforma Qobuz.
+Se utiliza el servicio [lucida.to](https://lucida.to) para obtener el contenido sin necesidad de tener una cuenta.
 
-```bash
+## 🚀 Instalación
+
+```
 bun install
+bun run build
+./lucid
 ```
 
-To run:
+Puedes saltarte los pasos de instalación y compilación descargando el binario desde [Releases](https://github.com/devjhoan/lucid/releases).
 
-```bash
-bun run src/index.ts
-```
+## 🧰 Dependencias
 
-This project was created using `bun init` in bun v1.1.20. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Este programa requiere de [bun](https://github.com/oven-sh/bun) para el proceso de compilación.
