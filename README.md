@@ -3,9 +3,15 @@
 Esta es una simple linea de comandos para descargar musica desde la plataforma Qobuz.
 Se utiliza el servicio [lucida.to](https://lucida.to) para obtener el contenido sin necesidad de tener una cuenta.
 
+## ✨ Ejemplos
+
+![lucid](src/images/cli-first.png)
+
+![lucid](src/images/cli-second.png)
+
 ## 🚀 Instalación
 
-```
+```bash
 bun install
 bun run build
 ./lucid
