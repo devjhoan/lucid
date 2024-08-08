@@ -109,7 +109,11 @@ export class ApiScraper {
 			const totalLength = response.headers["content-length"];
 
 			const extension = response.headers["x-download-extension"] || "flac";
-			const filename = `${String(track.trackNumber).padStart(2, "0")}. ${track.title}.${extension}`;
+			const filename =
+				`${String(track.trackNumber).padStart(2, "0")}. ${track.title}.${extension}`
+					.replaceAll(/\//g, " ")
+					.replaceAll(/"/g, "'");
+
 			const filePath = join(outputDir, filename);
 
 			let downloaded = 0;
