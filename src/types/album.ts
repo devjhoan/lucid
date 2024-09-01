@@ -38,6 +38,7 @@ export interface Track {
 	title: string;
 	id: string;
 	url: string;
+	csrf: string;
 	copyright: string;
 	artists: Artist[];
 	durationMs: number;

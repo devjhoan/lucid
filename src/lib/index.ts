@@ -31,18 +31,23 @@ export class ApiScraper {
 			const dataRegex = /const data = (\[.*?\]);/s;
 			const match = dataRegex.exec(scriptContent);
 
-			if (match?.[1]) {
+			if (match?.[0]) {
 				// TODO!: Quitar el eval
+				const payloadString = match[0]
+					.replaceAll("const data = ", "")
+					.replaceAll("null,", "")
+					.replaceAll(/\n/g, "")
+					.replaceAll(/\t/g, "")
+					.replaceAll(/\s{2,}/g, " ")
+					.replaceAll(
+						/,selectedCountry:token:"album"/g,
+						',selectedCountry:"US",token:"album"',
+					)
+					.replaceAll(/;/g, "")
+					.trim();
+
 				// biome-ignore lint/security/noGlobalEval: no encuentro otra manera de hacerlo
-				const data = eval(
-					match[1]
-						.replaceAll("const data = ", "")
-						.replaceAll("null,", "")
-						.replaceAll(/\n/g, "")
-						.replaceAll(/\t/g, "")
-						.replaceAll(/\s{2,}/g, " ")
-						.trim(),
-				)[0];
+				const data = eval(payloadString)[0];
 
 				const albumInformation = data.data.info as QobuzResponse;
 				return albumInformation;
@@ -103,7 +108,7 @@ export class ApiScraper {
 		callback?: (progress: number) => void;
 	}) {
 		try {
-			const url = `${this.url}/api/load?url=/api/fetch/stream?url=${track.url}&meta=true&downscale=original&album=true&private=false&country=auto`;
+			const url = `https://hund.lucida.to/api/fetch/stream?url=${track.url}&meta=true&downscale=original&album=true&private=false&country=US&csrf=${track.csrf}`;
 			const response = await axios.get(url, { responseType: "stream" });
 
 			const totalLength = response.headers["content-length"];
